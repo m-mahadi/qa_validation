@@ -399,7 +399,7 @@ function validateEntry(entry, idx, all) {
   }
 
   // E23 — Bangla IRAC content check
-  if (lang === "bn") {
+  if (bangla) {
     const ir = entry["IRAC_Reasoning"];
     if (!ir || typeof ir !== "object" || Array.isArray(ir)) {
       err("E23", "Bangla entries must include IRAC_Reasoning values in Bangla.");
