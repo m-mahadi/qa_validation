@@ -54,7 +54,7 @@ const isEntryBangla = entry =>
 const startsWithBanglaActCitation = s => {
   if (!s) return false;
   const t = s.trim();
-  return /^The\s+\w/i.test(t) && /অনুযায়ী/.test(t);
+  return /^The\s+\w/i.test(t) && /অনুযা(?:য়ী|য়ী|য়ি|য়ি)/.test(t);
 };
 const startsWithActCitation = s => !!s && ACT_CITATION_PREFIX_RE.test(s.trim());
 const startsWithUnder = s => !!s && /^under\s/i.test(s.trim());
