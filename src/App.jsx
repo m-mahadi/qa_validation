@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 
 // ── Valid types ───────────────────────────────────────────────────────────────
 const VALID_BASE_TYPES = new Set([
