@@ -33,27 +33,57 @@ const ADV_KEYS = [
 // ── Helpers ───────────────────────────────────────────────────────────────────
 const countWords = s => (!s || typeof s !== "string") ? 0 : s.trim().split(/\s+/).filter(Boolean).length;
 
+const ACT_CITATION_PREFIX_RE = /^(?:The\s+)?[\w\s]+(?:Act|Code|Procedure|Ordinance|Rules?),\s*\d{4},\s*(?:Section|Order|Rule|Schedule|Article)\b/i;
+
 function countSentences(s) {
   if (!s || typeof s !== "string" || !s.trim()) return 0;
   const c = s
     .replace(/\b(Section|Order|Rule|Art|Cl|Sub|No|vs|etc|ibid|viz|e\.g|i\.e)\./gi, "$1_")
     .replace(/\d+\.\d+/g, m => m.replace(".", "_"))
-    .replace(/\([a-zA-Z0-9]+\)\./g, m => m.replace(".", "_"));
+    .replace(/\([a-zA-Z0-9]+\)\./g, m => m.replace(".", "_"))
+    .replace(/\([\u0980-\u09FF\u09E6-\u09EF]+\)\./g, m => m.replace(".", "_"));
   const m = c.match(/[^.!?।]+[.!?।]+/g);
   return m ? m.filter(x => x.trim().length > 2).length : (s.trim().length > 0 ? 1 : 0);
 }
 
 const hasCitation = s => !!s && /(?:The\s+)?[\w\s]+(?:Act|Code|Procedure|Ordinance|Rules?),\s*\d{4}/i.test(s);
+const isBangla = s => typeof s === "string" && /[\u0980-\u09FF]/.test(s);
+const hasBanglaChar = isBangla;
+const isEntryBangla = entry =>
+  isBangla(entry?.["Question"] || "") || isBangla(entry?.["Answer"] || "");
+const startsWithBanglaActCitation = s => {
+  if (!s) return false;
+  const t = s.trim();
+  return /^The\s+\w/i.test(t) && /অনুযায়ী/.test(t);
+};
+const startsWithActCitation = s => !!s && ACT_CITATION_PREFIX_RE.test(s.trim());
 const startsWithUnder = s => !!s && /^under\s/i.test(s.trim());
 const hasMetaLanguage = s => !!s && [
   /the correct section is/i, /the answer is section/i,
   /section \w+ is correct/i, /the governing section is/i,
+  /সঠিক ধারা হলো/, /সঠিক ধারাটি হলো/,
+  /উত্তর হলো ধারা/, /ধারাটি সঠিক/,
+  /পরিচালনাকারী ধারা হলো/, /সঠিক section হলো/i,
 ].some(p => p.test(s));
 const isBareAssertion = s => !!s && [
-  /^this section does not apply\.?$/i, /^not applicable\.?$/i,
-  /^does not apply here\.?$/i, /^not relevant\.?$/i,
-  /^this is not the right section\.?$/i, /^প্রযোজ্য নয়\.?$/i,
-  /^applicable\.?$/i, /^this section applies\.?$/i,
+  /^this section does not apply\.?$/i,
+  /^not applicable\.?$/i,
+  /^does not apply here\.?$/i,
+  /^not relevant\.?$/i,
+  /^this is not the right section\.?$/i,
+  /^applicable\.?$/i,
+  /^this section applies\.?$/i,
+  /^প্রযোজ্য নয়।?$/,
+  /^এই ধারা প্রযোজ্য নয়।?$/,
+  /^এটি প্রযোজ্য নয়।?$/,
+  /^এখানে প্রযোজ্য নয়।?$/,
+  /^প্রাসঙ্গিক নয়।?$/,
+  /^সংশ্লিষ্ট নয়।?$/,
+  /^এটি সঠিক ধারা নয়।?$/,
+  /^প্রযোজ্য।?$/,
+  /^এই ধারা প্রযোজ্য।?$/,
+  /^এটি প্রযোজ্য।?$/,
+  /^এখানে প্রযোজ্য।?$/,
 ].some(p => p.test(s.trim()));
 
 const getFirstWord = s => s ? s.trim().split(/\s+/)[0].toLowerCase() : "";
@@ -64,6 +94,18 @@ function detectType(e) {
   if (e["Relevant Section"] === "None") return "null_relevance";
   if ("Relevant Section" in e) return "advanced_selection";
   return "single_hop";
+}
+
+function detectEntryLanguage(entry) {
+  if (!entry || typeof entry !== "object") return "en";
+  const irac = entry["IRAC_Reasoning"];
+  const samples = [
+    entry["Question"],
+    entry["Answer"],
+    entry["NO_IRAC_Reasoning"],
+    irac && typeof irac === "object" ? irac["Issue"] : "",
+  ];
+  return samples.some(hasBanglaChar) ? "bn" : "en";
 }
 
 // ── Grading ───────────────────────────────────────────────────────────────────
@@ -103,7 +145,8 @@ const CHECKS = {
     { code:"E11", label:'IRAC Issue non-empty',                          kind:"mandatory" },
     { code:"E12", label:'Rule is a string (not object), non-empty',      kind:"mandatory" },
     { code:"E13", label:'Application is a string (not object), non-empty',kind:"mandatory"},
-    { code:"E21", label:'Answer non-empty, starts "Under [Act Name],"',  kind:"mandatory" },
+    { code:"E23", label:'Bangla entries: IRAC values must be in Bangla', kind:"mandatory" },
+    { code:"E21", label:'Answer starts "Under [Act Name]," (EN) or "[Act Name] অনুযায়ী" (BN)', kind:"mandatory" },
     { code:"E22", label:'NO_IRAC non-empty, no IRAC labels',             kind:"mandatory" },
     { code:"W09", label:'IRAC total 45–70 words',                        kind:"advisory"  },
     { code:"W15", label:'Answer 25–45 words',                            kind:"advisory"  },
@@ -127,10 +170,11 @@ const CHECKS = {
     { code:"E11", label:'IRAC Issue non-empty',                          kind:"mandatory" },
     { code:"E15", label:'Rule is object with 5 keys, all non-empty',     kind:"mandatory" },
     { code:"E16", label:'Application: object, 5 keys, no bare assertions',kind:"mandatory"},
+    { code:"E23", label:'Bangla entries: IRAC values must be in Bangla', kind:"mandatory" },
     { code:"E17", label:'Possible Sections: exactly 5, all with Full Text',kind:"mandatory"},
     { code:"E18", label:'Correct section present in Possible Sections',  kind:"mandatory" },
     { code:"E19", label:'"Relevant Section" matches a Possible Section', kind:"mandatory" },
-    { code:"E21", label:'Answer non-empty, starts "Under", no meta-language',kind:"mandatory"},
+    { code:"E21", label:'Answer starts correctly (EN/BN), no meta-language',kind:"mandatory"},
     { code:"E22", label:'NO_IRAC non-empty, no IRAC labels, citation present',kind:"mandatory"},
     { code:"W15", label:'Answer 25–45 words',                            kind:"advisory"  },
     { code:"W17", label:'NO_IRAC 40–60 words',                           kind:"advisory"  },
@@ -152,11 +196,12 @@ const CHECKS = {
     { code:"E11", label:'IRAC Issue non-empty',                          kind:"mandatory" },
     { code:"E15", label:'Rule is object with 5 keys, all non-empty',     kind:"mandatory" },
     { code:"E16", label:'Application: object, 5 keys, no bare assertions',kind:"mandatory"},
+    { code:"E23", label:'Bangla entries: IRAC values must be in Bangla', kind:"mandatory" },
     { code:"E17", label:'Possible Sections: exactly 5, all with Full Text',kind:"mandatory"},
     { code:"E18", label:'Exclusion rule: correct section NOT in Possible Sections',kind:"mandatory"},
     { code:"E19", label:'"Relevant Section" is exactly "None"',          kind:"mandatory" },
     { code:"E20", label:'"Cited Acts and Sections" is "N/A (No relevant section in set)"',kind:"mandatory"},
-    { code:"E21", label:'Answer non-empty, no citation, does not start "Under"',kind:"mandatory"},
+    { code:"E21", label:'Answer non-empty, no citation, no Act citation prefix',kind:"mandatory"},
     { code:"E22", label:'NO_IRAC non-empty, no IRAC labels, no citation (exception rule)',kind:"mandatory"},
     { code:"W15", label:'Answer 25–40 words',                            kind:"advisory"  },
     { code:"W17", label:'NO_IRAC 30–50 words',                           kind:"advisory"  },
@@ -173,6 +218,7 @@ function validateEntry(entry, idx, all) {
   const err  = (code, msg) => errors.push({ code, msg });
   const warn = (code, msg) => warnings.push({ code, msg });
   const et = detectType(entry);
+  const bangla = isEntryBangla(entry);
 
   // E01 — Required keys
   const expectedKeys = et === "single_hop" ? SH_KEYS : ADV_KEYS;
@@ -253,7 +299,7 @@ function validateEntry(entry, idx, all) {
       err("E11", "IRAC Issue is empty.");
     else {
       if (countSentences(iss) > 1) warn("W04", `Issue has ${countSentences(iss)} sentences — target is 1.`);
-      if (et !== "single_hop" && countWords(iss) > 25) warn("W05", `Issue is ${countWords(iss)} words — target ≤15.`);
+      if (et !== "single_hop" && countWords(iss) > 15) warn("W05", `Issue is ${countWords(iss)} words — target ≤15.`);
     }
 
     // Single-hop Rule + Application
@@ -291,7 +337,7 @@ function validateEntry(entry, idx, all) {
 
       // IRAC total word count — advisory
       const tw = countWords(typeof iss==="string"?iss:"") + countWords(typeof rule==="string"?rule:"") + countWords(typeof app==="string"?app:"");
-      if (tw < 30 || tw > 130) warn("W09", `IRAC total is ${tw} words — target is 45–70.`);
+      if (tw < 45 || tw > 70) warn("W09", `IRAC total is ${tw} words — target is 45–70.`);
     }
 
     // Adv / NR Rule + Application
@@ -352,6 +398,41 @@ function validateEntry(entry, idx, all) {
     }
   }
 
+  // E23 — Bangla IRAC content check
+  if (lang === "bn") {
+    const ir = entry["IRAC_Reasoning"];
+    if (!ir || typeof ir !== "object" || Array.isArray(ir)) {
+      err("E23", "Bangla entries must include IRAC_Reasoning values in Bangla.");
+    } else {
+      const issue = typeof ir["Issue"] === "string" ? ir["Issue"] : "";
+      if (!hasBanglaChar(issue)) err("E23", "Bangla entry IRAC Issue must contain Bangla text.");
+
+      if (et === "single_hop") {
+        const rule = typeof ir["Rule"] === "string" ? ir["Rule"] : "";
+        const app = typeof ir["Application"] === "string" ? ir["Application"] : "";
+        if (!hasBanglaChar(rule)) err("E23", "Bangla entry IRAC Rule must contain Bangla text.");
+        if (!hasBanglaChar(app)) err("E23", "Bangla entry IRAC Application must contain Bangla text.");
+      } else {
+        const ruleObj = ir["Rule"];
+        const appObj = ir["Application"];
+        if (ruleObj && typeof ruleObj === "object" && !Array.isArray(ruleObj)) {
+          Object.entries(ruleObj).forEach(([k, v]) => {
+            if (typeof v === "string" && !hasBanglaChar(v)) {
+              err("E23", `Bangla entry IRAC Rule["${k}"] must contain Bangla text.`);
+            }
+          });
+        }
+        if (appObj && typeof appObj === "object" && !Array.isArray(appObj)) {
+          Object.entries(appObj).forEach(([k, v]) => {
+            if (typeof v === "string" && !hasBanglaChar(v)) {
+              err("E23", `Bangla entry IRAC Application["${k}"] must contain Bangla text.`);
+            }
+          });
+        }
+      }
+    }
+  }
+
   // E19 — Relevant Section
   if (et === "advanced_selection") {
     const rs = entry["Relevant Section"];
@@ -378,16 +459,24 @@ function validateEntry(entry, idx, all) {
   } else {
     const aw = countWords(ans);
     if (et === "single_hop" || et === "advanced_selection") {
-      if (!startsWithUnder(ans))
-        err("E21", `Answer must begin with "Under [Act Name],". Got: "${ans.substring(0, 50)}..."`);
+      const validStart = bangla ? startsWithBanglaActCitation(ans) : startsWithUnder(ans);
+      if (!validStart)
+        err("E21", bangla
+          ? `Bangla Answer must start with Act name (English) and contain "অনুযায়ী". Got: "${ans.substring(0, 60)}..."`
+          : `Answer must begin with "Under [Act Name],". Got: "${ans.substring(0, 50)}..."`
+        );
       if (et === "advanced_selection" && hasMetaLanguage(ans))
         err("E21", 'Answer must not use meta-language like "The correct section is..."');
-      if (aw < 10 || aw > 90) warn("W15", `Answer is ${aw} words — target is 25–45.`);
+      if (aw < 25 || aw > 45) warn("W15", `Answer is ${aw} words — target is 25–45.`);
     }
     if (et === "null_relevance") {
-      if (hasCitation(ans)) err("E21", "NR Answer must NOT contain a legislative citation.");
-      if (startsWithUnder(ans)) err("E21", "NR Answer must not start with 'Under' — no citation.");
-      if (aw < 10 || aw > 75) warn("W15", `Answer is ${aw} words — target is 25–40.`);
+      if (hasCitation(ans))
+        err("E21", "NR Answer must NOT contain a legislative citation (absent section must not be named).");
+      if (startsWithUnder(ans))
+        err("E21", "NR Answer must not start with 'Under' — citation is forbidden in NR answers.");
+      if (bangla && startsWithBanglaActCitation(ans))
+        err("E21", "NR Bangla Answer must not start with an Act citation — the governing section is absent.");
+      if (aw < 25 || aw > 40) warn("W15", `Answer is ${aw} words — target is 25–40.`);
     }
   }
 
@@ -396,20 +485,23 @@ function validateEntry(entry, idx, all) {
   if (!ni || typeof ni !== "string" || !ni.trim()) {
     err("E22", "NO_IRAC_Reasoning is empty.");
   } else {
-    if (/\b(Issue|Rule|Application|Conclusion)\s*:/i.test(ni))
-      err("E22", "NO_IRAC_Reasoning must not contain IRAC labels (Issue:, Rule:, etc.)");
+    if (
+      /\b(Issue|Rule|Application|Conclusion)\s*:/i.test(ni) ||
+      /\b(ইস্যু|রুল|অ্যাপ্লিকেশন|প্রয়োগ|সিদ্ধান্ত)\s*:/i.test(ni)
+    )
+      err("E22", "NO_IRAC_Reasoning must not contain IRAC labels (Issue:, Rule:, Application:, or their Bangla equivalents)");
     const nw = countWords(ni), ns = countSentences(ni);
     if (ns > 5) warn("W16", `NO_IRAC_Reasoning has ${ns} sentences — target is 2–3.`);
     if (et === "single_hop") {
-      if (nw < 15 || nw > 120) warn("W17", `NO_IRAC_Reasoning is ${nw} words — target is 30–50.`);
+      if (nw < 30 || nw > 50) warn("W17", `NO_IRAC_Reasoning is ${nw} words — target is 30–50.`);
       if (!hasCitation(ni)) warn("W18", "NO_IRAC_Reasoning should include a legislative citation.");
     }
     if (et === "advanced_selection") {
-      if (nw < 15 || nw > 130) warn("W17", `NO_IRAC_Reasoning is ${nw} words — target is 40–60.`);
+      if (nw < 40 || nw > 60) warn("W17", `NO_IRAC_Reasoning is ${nw} words — target is 40–60.`);
       if (!hasCitation(ni)) err("E22", "NO_IRAC_Reasoning must include a legislative citation.");
     }
     if (et === "null_relevance") {
-      if (nw < 15 || nw > 120) warn("W17", `NO_IRAC_Reasoning is ${nw} words — target is 30–50.`);
+      if (nw < 30 || nw > 50) warn("W17", `NO_IRAC_Reasoning is ${nw} words — target is 30–50.`);
       if (hasCitation(ni)) err("E22", "NR NO_IRAC_Reasoning must NOT contain a citation (exception rule).");
     }
   }
