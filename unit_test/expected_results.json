@@ -1,0 +1,1258 @@
+{
+  "generated_at": "2026-03-12T10:21:09.217Z",
+  "source_dataset": "unit_test/unit_test.json",
+  "summary": {
+    "total": 106,
+    "clean": 6,
+    "pass": 44,
+    "fail": 56
+  },
+  "entries": [
+    {
+      "idx": 1,
+      "entryId": 1,
+      "sectionNumber": "A1-SH-EN-CLEAN",
+      "expected_grade": "clean",
+      "expected_error_codes": [],
+      "expected_warning_codes": []
+    },
+    {
+      "idx": 2,
+      "entryId": 2,
+      "sectionNumber": "Section 19",
+      "expected_grade": "clean",
+      "expected_error_codes": [],
+      "expected_warning_codes": []
+    },
+    {
+      "idx": 3,
+      "entryId": 3,
+      "sectionNumber": "A3-NR-EN-CLEAN",
+      "expected_grade": "clean",
+      "expected_error_codes": [],
+      "expected_warning_codes": []
+    },
+    {
+      "idx": 4,
+      "entryId": 4,
+      "sectionNumber": "A4-SH-BN-CLEAN",
+      "expected_grade": "clean",
+      "expected_error_codes": [],
+      "expected_warning_codes": []
+    },
+    {
+      "idx": 5,
+      "entryId": 5,
+      "sectionNumber": "Section 19",
+      "expected_grade": "clean",
+      "expected_error_codes": [],
+      "expected_warning_codes": []
+    },
+    {
+      "idx": 6,
+      "entryId": 6,
+      "sectionNumber": "A6-NR-BN-CLEAN",
+      "expected_grade": "clean",
+      "expected_error_codes": [],
+      "expected_warning_codes": []
+    },
+    {
+      "idx": 7,
+      "entryId": 7,
+      "sectionNumber": "B1-E01-SH-MISSING-QUESTION",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E01",
+        "E05"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 8,
+      "entryId": 8,
+      "sectionNumber": "B2-E01-ADV-MISSING-PS",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E01",
+        "E17"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 9,
+      "entryId": 9,
+      "sectionNumber": "C1-E02-CAS-NOT-LAST",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E02"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 10,
+      "entryId": "not_an_int",
+      "sectionNumber": "D1-E03-ID-STRING",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E03"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 11,
+      "entryId": 999,
+      "sectionNumber": "D1-E03-ID-DUPLICATE",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E03"
+      ],
+      "expected_warning_codes": [
+        "W01",
+        "W09"
+      ]
+    },
+    {
+      "idx": 12,
+      "entryId": 999,
+      "sectionNumber": "D2-E03-ID-DUPLICATE",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E03"
+      ],
+      "expected_warning_codes": [
+        "W01",
+        "W03"
+      ]
+    },
+    {
+      "idx": 13,
+      "entryId": 9999,
+      "sectionNumber": "D3-W01-ID-NONSEQUENTIAL",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W01",
+        "W03"
+      ]
+    },
+    {
+      "idx": 14,
+      "entryId": 14,
+      "sectionNumber": "",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E04"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 15,
+      "entryId": 15,
+      "sectionNumber": "E5-E05-QUESTION-EMPTY",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E05"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 16,
+      "entryId": 16,
+      "sectionNumber": "E6a-E06-ST-EMPTY",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E06"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 17,
+      "entryId": 17,
+      "sectionNumber": "E6b-W02-ST-SHORT",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W02",
+        "W03"
+      ]
+    },
+    {
+      "idx": 18,
+      "entryId": 18,
+      "sectionNumber": "E7a-E07-KW-NOT-ARRAY",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E07"
+      ],
+      "expected_warning_codes": []
+    },
+    {
+      "idx": 19,
+      "entryId": 19,
+      "sectionNumber": "E7b-W03-KW-TOO-FEW",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 20,
+      "entryId": 20,
+      "sectionNumber": "E7c-W03-KW-TOO-MANY",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 21,
+      "entryId": 21,
+      "sectionNumber": "F1-E08-SH-INVALID-TYPE",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E08"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 22,
+      "entryId": 22,
+      "sectionNumber": "F2-E08-SH-NE-PREFIX",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E08"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 23,
+      "entryId": 23,
+      "sectionNumber": "F3-E08-NR-MISSING-NE-PREFIX",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E08"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 24,
+      "entryId": 24,
+      "sectionNumber": "F4-E08-NR-INVALID-BASE",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E08"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 25,
+      "entryId": 25,
+      "sectionNumber": "G1-E09-SH-WRONG-DIFF",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E09"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 26,
+      "entryId": 26,
+      "sectionNumber": "G2-E09-ADV-WRONG-DIFF",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E09",
+        "E18"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 27,
+      "entryId": 27,
+      "sectionNumber": "G3-E09-NR-WRONG-DIFF",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E09"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 28,
+      "entryId": 28,
+      "sectionNumber": "H1-E10-IRAC-ARRAY",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E10"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 29,
+      "entryId": 29,
+      "sectionNumber": "H2-E10-IRAC-CONCLUSION",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E10"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 30,
+      "entryId": 30,
+      "sectionNumber": "H3-E10-IRAC-MISSING-APP",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E10",
+        "E13"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "idx": 31,
+      "entryId": 31,
+      "sectionNumber": "I1-E11-ISSUE-EMPTY",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E11"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "idx": 32,
+      "entryId": 32,
+      "sectionNumber": "I2-W04-ISSUE-2-SENTENCES",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W04"
+      ]
+    },
+    {
+      "idx": 33,
+      "entryId": 33,
+      "sectionNumber": "I3-E12-RULE-OBJECT",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E12"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "idx": 34,
+      "entryId": 34,
+      "sectionNumber": "I4-E12-RULE-EMPTY",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E12"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "idx": 35,
+      "entryId": 35,
+      "sectionNumber": "I5-W06-RULE-2-SENTENCES",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W06"
+      ]
+    },
+    {
+      "idx": 36,
+      "entryId": 36,
+      "sectionNumber": "I6-W07-RULE-VERBATIM",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W07"
+      ]
+    },
+    {
+      "idx": 37,
+      "entryId": 37,
+      "sectionNumber": "I7-E13-APP-EMPTY",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E13"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "idx": 38,
+      "entryId": 38,
+      "sectionNumber": "I8-E13-APP-OBJECT",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E13"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "idx": 39,
+      "entryId": 39,
+      "sectionNumber": "I9-W08-APP-3-SENTENCES",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W08"
+      ]
+    },
+    {
+      "idx": 40,
+      "entryId": 40,
+      "sectionNumber": "I10-W09-IRAC-TOO-SHORT",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "idx": 41,
+      "entryId": 41,
+      "sectionNumber": "I11-W09-IRAC-TOO-LONG",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W09"
+      ]
+    },
+    {
+      "idx": 42,
+      "entryId": 42,
+      "sectionNumber": "J1-E15-RULE-STRING",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E15",
+        "E18"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 43,
+      "entryId": 43,
+      "sectionNumber": "J2-E15-RULE-4-KEYS",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E15",
+        "E18"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 44,
+      "entryId": 44,
+      "sectionNumber": "J3-E15-RULE-EMPTY-VAL",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E15",
+        "E18"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 45,
+      "entryId": 45,
+      "sectionNumber": "J4-E16-APP-STRING",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E16"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 46,
+      "entryId": 46,
+      "sectionNumber": "J5-E16-BARE-ASSERT-EN",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E16",
+        "E18"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 47,
+      "entryId": 47,
+      "sectionNumber": "J6-E16-BARE-ASSERT-BN",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E16"
+      ],
+      "expected_warning_codes": [
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "idx": 48,
+      "entryId": 48,
+      "sectionNumber": "Section 19",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W11"
+      ]
+    },
+    {
+      "idx": 49,
+      "entryId": 49,
+      "sectionNumber": "Section 19",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W14",
+        "W15"
+      ]
+    },
+    {
+      "idx": 50,
+      "entryId": 50,
+      "sectionNumber": "K1-E17-PS-NOT-ARRAY",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E17"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 51,
+      "entryId": 51,
+      "sectionNumber": "K2-E17-PS-4-ENTRIES",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E17",
+        "E18"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 52,
+      "entryId": 52,
+      "sectionNumber": "K3-E17-PS-MISSING-FULLTEXT",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E17",
+        "E18"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 53,
+      "entryId": 53,
+      "sectionNumber": "K4-E18-ADV-CORRECT-ABSENT",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E18",
+        "E19"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 54,
+      "entryId": 54,
+      "sectionNumber": "Section 19",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E18"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 55,
+      "entryId": 55,
+      "sectionNumber": "K6-E19-ADV-RS-NONE",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E18",
+        "E19"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 56,
+      "entryId": 56,
+      "sectionNumber": "K7-E19-ADV-RS-MISMATCH",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E18",
+        "E19"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 57,
+      "entryId": 57,
+      "sectionNumber": "K8-E19-NR-RS-NOT-NONE",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E08",
+        "E09",
+        "E18",
+        "E19",
+        "E21",
+        "E22"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 58,
+      "entryId": 58,
+      "sectionNumber": "K9-E20-NR-CAS-WRONG",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E20"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 59,
+      "entryId": 59,
+      "sectionNumber": "L1-E21-SH-EN-NO-UNDER",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E21"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 60,
+      "entryId": 60,
+      "sectionNumber": "L2-E21-SH-BN-NO-ANUYAYI",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E21"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09",
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "idx": 61,
+      "entryId": 61,
+      "sectionNumber": "L3-E21-ADV-META-LANG",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E18",
+        "E21"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 62,
+      "entryId": 62,
+      "sectionNumber": "L4-E21-NR-CITATION-IN-ANS",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E21",
+        "E21"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 63,
+      "entryId": 63,
+      "sectionNumber": "L5-E21-NR-STARTS-UNDER",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E21"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 64,
+      "entryId": 64,
+      "sectionNumber": "L6-E21-NR-BN-ACT-CITATION",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E21",
+        "E21"
+      ],
+      "expected_warning_codes": [
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "idx": 65,
+      "entryId": 65,
+      "sectionNumber": "L7-W15-ANS-TOO-SHORT",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 66,
+      "entryId": 66,
+      "sectionNumber": "L8-W15-NR-ANS-TOO-LONG",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W15"
+      ]
+    },
+    {
+      "idx": 67,
+      "entryId": 67,
+      "sectionNumber": "M1-E22-NO-IRAC-EMPTY",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E22"
+      ],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 68,
+      "entryId": 68,
+      "sectionNumber": "M2-E22-IRAC-LABEL-EN",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E22"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W17",
+        "W18"
+      ]
+    },
+    {
+      "idx": 69,
+      "entryId": 69,
+      "sectionNumber": "M3-E22-IRAC-LABEL-BN",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E22"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09",
+        "W15",
+        "W17",
+        "W18"
+      ]
+    },
+    {
+      "idx": 70,
+      "entryId": 70,
+      "sectionNumber": "M4-E22-ADV-NO-CITATION",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E18",
+        "E22"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "idx": 71,
+      "entryId": 71,
+      "sectionNumber": "M5-E22-NR-HAS-CITATION",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E22"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W17"
+      ]
+    },
+    {
+      "idx": 72,
+      "entryId": 72,
+      "sectionNumber": "M6-W16-NO-IRAC-6-SENTENCES",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W16"
+      ]
+    },
+    {
+      "idx": 73,
+      "entryId": 73,
+      "sectionNumber": "M7-W17-SH-NO-IRAC-SHORT",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W17"
+      ]
+    },
+    {
+      "idx": 74,
+      "entryId": 74,
+      "sectionNumber": "Section 19",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W17"
+      ]
+    },
+    {
+      "idx": 75,
+      "entryId": 75,
+      "sectionNumber": "M9-W18-SH-NO-IRAC-NO-CITE",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W18"
+      ]
+    },
+    {
+      "idx": 76,
+      "entryId": 76,
+      "sectionNumber": "N1-E23-SH-BN-ISSUE-NO-BANGLA",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E23"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09",
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "idx": 77,
+      "entryId": 77,
+      "sectionNumber": "N2-E23-SH-BN-RULE-NO-BANGLA",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E23"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09",
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "idx": 78,
+      "entryId": 78,
+      "sectionNumber": "N3-E23-SH-BN-APP-NO-BANGLA",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E23"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W09",
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "idx": 79,
+      "entryId": 79,
+      "sectionNumber": "N4-E23-ADV-BN-RULE-NO-BANGLA",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E18",
+        "E23"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "idx": 80,
+      "entryId": 80,
+      "sectionNumber": "N5-E23-NR-BN-APP-NO-BANGLA",
+      "expected_grade": "fail",
+      "expected_error_codes": [
+        "E23"
+      ],
+      "expected_warning_codes": [
+        "W03",
+        "W15",
+        "W17"
+      ]
+    },
+    {
+      "idx": 81,
+      "entryId": 81,
+      "sectionNumber": "O1-BATCH-APP-STARTER",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 82,
+      "entryId": 82,
+      "sectionNumber": "O2-BATCH-APP-STARTER",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 83,
+      "entryId": 83,
+      "sectionNumber": "O3-BATCH-APP-STARTER",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 84,
+      "entryId": 84,
+      "sectionNumber": "O4-BATCH-APP-STARTER",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 85,
+      "entryId": 85,
+      "sectionNumber": "O5-BATCH-APP-STARTER",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 86,
+      "entryId": 86,
+      "sectionNumber": "O-NR-1-BATCH-SHARED-OPENING",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W17"
+      ]
+    },
+    {
+      "idx": 87,
+      "entryId": 87,
+      "sectionNumber": "O-NR-2-BATCH-SHARED-OPENING",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W17"
+      ]
+    },
+    {
+      "idx": 88,
+      "entryId": 88,
+      "sectionNumber": "O-NR-3-BATCH-SHARED-OPENING",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W17"
+      ]
+    },
+    {
+      "idx": 89,
+      "entryId": 89,
+      "sectionNumber": "O-NR-4-BATCH-SHARED-OPENING",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W17"
+      ]
+    },
+    {
+      "idx": 90,
+      "entryId": 90,
+      "sectionNumber": "O-NAME-1-BATCH-RAHUL",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 91,
+      "entryId": 91,
+      "sectionNumber": "O-NAME-2-BATCH-RAHUL",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 92,
+      "entryId": 92,
+      "sectionNumber": "O-NAME-3-BATCH-RAHUL",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 93,
+      "entryId": 93,
+      "sectionNumber": "O-TYPE-DIV-1",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 94,
+      "entryId": 94,
+      "sectionNumber": "O-TYPE-DIV-2",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 95,
+      "entryId": 95,
+      "sectionNumber": "O-TYPE-DIV-3",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 96,
+      "entryId": 96,
+      "sectionNumber": "O-TYPE-DIV-4",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 97,
+      "entryId": 97,
+      "sectionNumber": "O-TYPE-DIV-5",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 98,
+      "entryId": 98,
+      "sectionNumber": "O-TYPE-DIV-6",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 99,
+      "entryId": 99,
+      "sectionNumber": "O-TYPE-DIV-7",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 100,
+      "entryId": 100,
+      "sectionNumber": "O-TYPE-DIV-8",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 101,
+      "entryId": 101,
+      "sectionNumber": "O-TYPE-DIV-9",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 102,
+      "entryId": 102,
+      "sectionNumber": "O-TYPE-DIV-10",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 103,
+      "entryId": 103,
+      "sectionNumber": "O-TYPE-REPEAT-1",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 104,
+      "entryId": 104,
+      "sectionNumber": "O-TYPE-REPEAT-2",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 105,
+      "entryId": 105,
+      "sectionNumber": "O-TYPE-REPEAT-3",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03"
+      ]
+    },
+    {
+      "idx": 106,
+      "entryId": 106,
+      "sectionNumber": "Section 19",
+      "expected_grade": "pass",
+      "expected_error_codes": [],
+      "expected_warning_codes": [
+        "W03",
+        "W05"
+      ]
+    }
+  ]
+}

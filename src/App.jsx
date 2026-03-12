@@ -550,6 +550,8 @@ function validateBatch(entries) {
   return bw;
 }
 
+export { validateEntry, validateBatch, detectType, detectEntryLanguage };
+
 // ── UI ────────────────────────────────────────────────────────────────────────
 const TL = { single_hop:"Single-Hop", advanced_selection:"Adv. Selection", null_relevance:"Null Relevance" };
 const TC = { single_hop:"#3b82f6", advanced_selection:"#8b5cf6", null_relevance:"#ef4444" };
